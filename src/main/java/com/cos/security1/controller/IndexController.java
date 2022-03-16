@@ -50,6 +50,8 @@ public class IndexController {
 		return "OAuth 세션 정보 확인하기";
 	}
 	
+	
+	
 	@GetMapping({ "", "/" })
 	public String index() {
 		// mustache 기본폴더 src/main/resources/
@@ -57,8 +59,10 @@ public class IndexController {
 		return "index"; // src/main/resources/templates/index.mustache
 	}
 
+	// OAuth 로그인이든 일반 로그인이든 PrincipalDetails로 받을 수 있다.
 	@GetMapping("/user")
-	public @ResponseBody String user() {
+	public @ResponseBody String user(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+		System.out.println("principalDetails : " + principalDetails.getUser());
 		return "user";
 	}
 
